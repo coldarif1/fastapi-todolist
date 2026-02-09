@@ -120,35 +120,6 @@
 </head>
 <body>
 
-<header class="hero">
-  <h1 id="greeting">👋 Hello</h1>
-  <p id="subtext">Make today count!</p>
-</header>
-
-<div class="user-info">
-    {% if user %}
-    <span>Logged in as {{ user.username }}</span>
-    <a href="/logout"><button>Logout</button></a>
-    {% endif %}
-</div>
-
-<div class="tasks-container">
-    {% for task in tasks %}
-    <div class="task-card {{ loop.index % 2 == 0 and 'purple' or 'yellow' }}">
-        <div class="task-title">{{ task.title }}</div>
-        <div class="task-desc">{{ task.description if task.description else '' }}</div>
-        <div class="task-actions">
-            <button onclick="editTask({{ task.id }})">✏️</button>
-            <form method="post" action="/tasks/{{ task.id }}/delete" style="display:inline;">
-                <button type="submit">🗑️</button>
-            </form>
-        </div>
-    </div>
-    {% endfor %}
-</div>
-
-<a href="/add-task" class="add-task-btn">+ Add New Task</a>
-
 <script>
   // Greeting Logic
  function getGreetingParts(date = new Date()) {
@@ -191,7 +162,39 @@ function updateGreeting() {
         form.submit();
     }
   }
-</script>
+</script>    
+
+<header class="hero">
+  <h1 id="greeting">👋 Hello</h1>
+  <p id="subtext">Make today count!</p>
+</header>
+
+<div class="user-info">
+    {% if user %}
+    <span>Logged in as {{ user.username }}</span>
+    <a href="/logout"><button>Logout</button></a>
+    {% endif %}
+</div>
+
+<div class="tasks-container">
+    {% for task in tasks %}
+    <div class="task-card {{ loop.index % 2 == 0 and 'purple' or 'yellow' }}">
+        <div class="task-title">{{ task.title }}</div>
+        <div class="task-desc">{{ task.description if task.description else '' }}</div>
+        <div class="task-actions">
+            <button onclick="editTask({{ task.id }})">✏️</button>
+            <form method="post" action="/tasks/{{ task.id }}/delete" style="display:inline;">
+                <button type="submit">🗑️</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<a href="/add-task" class="add-task-btn">+ Add New Task</a>
+
+
 
 </body>
+
 </html>
